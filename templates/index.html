@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audio Translation Web App</title>
+</head>
+<body>
+    <h1>Audio Translation Web App</h1>
+    
+    <!-- Form for file upload -->
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" accept=".wav, .mp3" required>
+        <button type="submit">Upload</button>
+    </form>
+
+    <!-- Display original and translated text -->
+    <div>
+        <h2>Original Text:</h2>
+        <p id="original-text">Waiting for translation...</p>
+
+        <h2>Translated Text:</h2>
+        <p id="translated-text">Translation will appear here...</p>
+    </div>
+
+    <!-- Download button for translated language file -->
+    <a id="download-link" style="display: none;" download="translated_text.txt">
+        <button id="download-button">Download Translated Text</button>
+    </a>
+
+    <!-- JavaScript for updating text and showing/hiding download link -->
+    <script>
+        // Function to update the displayed text
+        function updateText(originalText, translatedText) {
+            document.getElementById("original-text").innerText = "Original Text: " + originalText;
+            document.getElementById("translated-text").innerText = "Translated Text: " + translatedText;
+            
+            // Show the download link and enable download button
+            document.getElementById("download-link").style.display = "block";
+            document.getElementById("download-link").href = "data:text/plain;charset=utf-8," + encodeURIComponent(translatedText);
+            document.getElementById("download-button").disabled = false;
+        }
+    </script>
+</body>
+</html>
